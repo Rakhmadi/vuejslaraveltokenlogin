@@ -1,5 +1,5 @@
 <template>
     <div>
-        sf
+        page single vue
     </div>
 </template>
