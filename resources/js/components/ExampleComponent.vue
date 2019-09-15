@@ -17,7 +17,9 @@
 </template>
 <script>
 axios.defaults.headers.common['Accept']='aplication/json';
+import axios from 'axios'
     export default {
+        
         data(){
             return{
                 name:'',
@@ -35,7 +37,6 @@ axios.defaults.headers.common['Accept']='aplication/json';
                 msg:{
                     msg:null
                 }
-                               
                                }
         },
         methods:{
@@ -64,10 +65,6 @@ axios.defaults.headers.common['Accept']='aplication/json';
                     stock:this.stock,
                     api_token:ns
                 },{
-                    headers:{
-                        'Accept':'application/json',
-                        'Content-Type':'application/json'}
-                        },{
                             params:{
                                 api_token:''
                             }
