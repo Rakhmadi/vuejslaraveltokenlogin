@@ -20,3 +20,4 @@ route::get('/show','dataxs@showw');
 route::post('/register','syscontrol@register');
 route::post('/login','syscontrol@login');
 route::post('/post','dataxs@postd')->middleware('auth:api');
+route::get('/singel/{id}','dataxs@singel');

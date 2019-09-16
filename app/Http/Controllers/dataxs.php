@@ -27,4 +27,8 @@ class dataxs extends Controller
             ]);
         }
     }
+    public function singel($id){
+        $t=dataxmodl::find($id);
+        return response()->json($t);
+    }
 }
