@@ -10,6 +10,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 import apps from './components/app.vue'
 import home from './components/ExampleComponent.vue'
 import singel from './components/singel.vue'
+import datasd from './components/aldat.vue'
 const router  = new Vrouter({
     mode:'history',
     routes:[
@@ -22,6 +23,11 @@ const router  = new Vrouter({
             path:'/single',
             name:'singel',
             component:singel
+        },
+        {
+            path:'/data',
+            name:'datas',
+            component:datasd
         },
 
     ]
