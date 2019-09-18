@@ -1,5 +1,6 @@
 <template>
 <div>
+     <div v-show="load"> <img src="http://127.0.0.1:8000/loading.gif" width='90px' alt=""></div>
      <input type="text" v-model="name">
      <input type="text" v-model="password">
      <button v-on:click='login'>Login</button>
@@ -36,16 +37,19 @@ import axios from 'axios'
                 stock:'',
                 msg:{
                     msg:null
-                }
+                },
+                load:false
                                }
         },
         methods:{
             login(){
                 var rt=this;
+                rt.load=true;
                 axios.post('api/login',{
                     name:this.name,
                     password:this.password
                 }).then(function (response) {
+                    rt.load=false;
                     rt.day = response.data;
                     console.log(response.data);
                     if (rt.day.status === 'success') {
@@ -58,7 +62,9 @@ import axios from 'axios'
                 });
             },
             post(){
+               
                 var n=this;
+                 n.load=true;
                 var ns=window.localStorage.getItem('token');
                 axios.post('api/post',{
                     name:this.names,
@@ -69,6 +75,7 @@ import axios from 'axios'
                                 api_token:''
                             }
                         }).then(function(resp){
+                            n.load=false;
                     n.msg=resp.data;
                     console.log(resp.data);
                     

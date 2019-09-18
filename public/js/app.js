@@ -1857,6 +1857,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Accept'] = 'aplication/json';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1876,16 +1877,19 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Accept'] =
       stock: '',
       msg: {
         msg: null
-      }
+      },
+      load: false
     };
   },
   methods: {
     login: function login() {
       var rt = this;
+      rt.load = true;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/login', {
         name: this.name,
         password: this.password
       }).then(function (response) {
+        rt.load = false;
         rt.day = response.data;
         console.log(response.data);
 
@@ -1899,6 +1903,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Accept'] =
     },
     post: function post() {
       var n = this;
+      n.load = true;
       var ns = window.localStorage.getItem('token');
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/post', {
         name: this.names,
@@ -1909,6 +1914,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Accept'] =
           api_token: ''
         }
       }).then(function (resp) {
+        n.load = false;
         n.msg = resp.data;
         console.log(resp.data);
       })["catch"](function (error) {
@@ -1948,6 +1954,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+function seters(x, y, z) {
+  return x + y + z;
+}
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1956,16 +1967,21 @@ __webpack_require__.r(__webpack_exports__);
         id: 0,
         name: 'N/A',
         stock: 'N/A',
-        created_at: 'N/A'
-      }
+        created_at: 'N/A',
+        nad: ''
+      },
+      loading: true
     };
   },
   created: function created() {
     var ed = this;
+    console.log(seters(12, 3, 1));
     console.log('maontedsys');
+    ed.loading = true;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/show').then(function (resp) {
       ed.datad = resp.data.data;
       console.log(resp.data);
+      ed.loading = false;
     })["catch"](function (err) {
       ed.datad = err;
       console.log(err);
@@ -1994,6 +2010,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2003,7 +2021,8 @@ __webpack_require__.r(__webpack_exports__);
         name: 'N/A',
         stock: 'N/A',
         created_at: 'N/A'
-      }
+      },
+      loading: true
     };
   },
   mounted: function mounted() {
@@ -2011,9 +2030,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     var v = this;
+    v.loading = true;
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/singel/".concat(this.$route.params.id)).then(function (res) {
       v.datas = res.data;
       console.log(res.data);
+      v.loading = false;
     })["catch"](function (err) {
       v.datas = err;
       console.log(err);
@@ -37318,6 +37340,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.load,
+            expression: "load"
+          }
+        ]
+      },
+      [
+        _c("img", {
+          attrs: {
+            src: "http://127.0.0.1:8000/loading.gif",
+            width: "90px",
+            alt: ""
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
     _c("input", {
       directives: [
         {
@@ -37464,6 +37509,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ]
+      },
+      [
+        _c("img", {
+          attrs: {
+            src: "http://127.0.0.1:8000/loading.gif",
+            width: "50px",
+            alt: ""
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
     _vm.datad
       ? _c(
           "ul",
@@ -37520,23 +37588,179 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("router-link", { attrs: { to: { name: "home" } } }, [_vm._v("home")]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "singel" } } }, [
-        _vm._v("singel")
+  return _c("div", [
+    _c("nav", { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" }, [
+      _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+        _vm._v("Navbar")
       ]),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "datas" } } }, [_vm._v("data")]),
+      _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [_c("router-view")], 1)
-    ],
-    1
-  )
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarSupportedContent" }
+        },
+        [
+          _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+            _c(
+              "li",
+              { staticClass: "nav-item " },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: { name: "home" } } },
+                  [_vm._v("home")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "singel" } }
+                  },
+                  [_vm._v("singel")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: { name: "datas" } } },
+                  [_vm._v("data")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ]),
+          _vm._v(" "),
+          _vm._m(3)
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [_c("router-view")], 1)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarSupportedContent",
+          "aria-controls": "navbarSupportedContent",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item dropdown" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link dropdown-toggle",
+          attrs: {
+            href: "#",
+            id: "navbarDropdown",
+            role: "button",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }
+        },
+        [_vm._v("\n          Dropdown\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "dropdown-menu",
+          attrs: { "aria-labelledby": "navbarDropdown" }
+        },
+        [
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("Action")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("Another action")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "dropdown-divider" }),
+          _vm._v(" "),
+          _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
+            _vm._v("Something else here")
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link disabled",
+          attrs: { href: "#", tabindex: "-1", "aria-disabled": "true" }
+        },
+        [_vm._v("Disabled")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
+      _c("input", {
+        staticClass: "form-control mr-sm-2",
+        attrs: { type: "search", placeholder: "Search", "aria-label": "Search" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success my-2 my-sm-0",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Search")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -37559,13 +37783,45 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ]
+      },
+      [
+        _c("img", {
+          attrs: {
+            src: "http://127.0.0.1:8000/loading.gif",
+            width: "50px",
+            alt: ""
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.datas.id))]),
     _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.datas.name))]),
     _vm._v(" "),
     _c("p", [_vm._v(_vm._s(_vm.datas.stock))]),
     _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.datas.created_at))])
+    _c("p", [_vm._v(_vm._s(_vm.datas.created_at))]),
+    _vm._v(" "),
+    _c("img", {
+      attrs: {
+        src:
+          "https://3.bp.blogspot.com/-Vcue-aRpaZU/Wi4atyGVy6I/AAAAAAAAAWg/t-GUrdbS-bY-R4OWuxRP3wMXoH2Nz0rFQCPcBGAYYCw/s1600/afdsfaefsdfaefa.png",
+        width: "100px",
+        alt: ""
+      }
+    })
   ])
 }
 var staticRenderFns = []

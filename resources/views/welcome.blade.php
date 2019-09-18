@@ -6,6 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
+        <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
+<script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
     </head>
     <body>
         <div id="app">
