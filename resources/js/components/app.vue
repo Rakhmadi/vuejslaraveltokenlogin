@@ -17,6 +17,9 @@
       <li class="nav-item">
          <router-link class="nav-link" :to="{name:'datas'}">data</router-link>
       </li>
+      <li class="nav-item">
+         <router-link class="nav-link" :to="{name:'n'}">data</router-link>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown

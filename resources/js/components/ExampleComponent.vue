@@ -14,10 +14,14 @@
      <input type="text" v-model="stock">
      <button @click='post'>saves</button>
      <br><p style="color:blue" v-text="msg.msg"></p>
+     <button @click="n"></button>
 </div>
 </template>
 <script>
 axios.defaults.headers.common['Accept']='aplication/json';
+function setCokie(nv,exp){
+    document.cookie =nv,exp;  
+}
 import axios from 'axios'
     export default {
         
@@ -42,6 +46,9 @@ import axios from 'axios'
                                }
         },
         methods:{
+            n(){
+                setCokie("username=John Doe;","expires=Thu, 18 Dec 2013 12:00:00 UTC;");
+            },
             login(){
                 var rt=this;
                 rt.load=true;

@@ -7,12 +7,14 @@ import axios from 'axios'
 Vue.use(Vrouter);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import store from './store'
 import apps from './components/app.vue'
 import home from './components/ExampleComponent.vue'
 import singel from './components/singel.vue'
 import datasd from './components/aldat.vue'
+import n from './components/s.vue'
 const router  = new Vrouter({
-    mode:'history',
+    mode:'hash',
     routes:[
         {
             path:'/home',
@@ -28,12 +30,18 @@ const router  = new Vrouter({
             path:'/data',
             name:'datas',
             component:datasd
-        },
+        },{
+            path:'/n',
+            name:'n',
+            component:n
+        }
 
     ]
 });
 const app = new Vue({
+    store,
     el: '#app',
     components:{ apps },
     router,
+    
 });
